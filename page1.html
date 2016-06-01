@@ -6,29 +6,23 @@
     <link rel="stylesheet" href="node_modules/angular-material/angular-material.css"/>
     <link rel="stylesheet" href="style/page1.css">
 </head>
-<body ng-app="starterApp" layout="column">
+<body ng-app="starterApp" ng-cloak  layout="column" ng-controller="Page1Controller as pc">
 
 <md-toolbar layout="row">
     <h1>Angular Material - Page 1</h1>
 </md-toolbar>
 <div class="container" flex layout="row">
-    <md-sidenav md-is-locked-open="true" class="md-whiteframe-z2">
-    <md-list-item>
-        <md-button><md-icon md-svg-src="images/avatar-1.svg" class="avatar"></md-icon>Test1</md-button>
+    <md-sidenav md-is-locked-open="true" class="md-whiteframe-z2" >
+    <md-list-item ng-repeat="p in pc.page1">
+        <md-button ng-click="pc.selectPage1(p)" ng-class="{'selected':u===pc.selected}"><md-icon md-svg-src="images/{{p.avatar}}" class="avatar"></md-icon>{{u.name}}</md-button>
     </md-list-item>
-    <md-list-item>
-        <md-button><md-icon md-svg-src="images/avatar-1.svg" class="avatar"></md-icon>Test2</md-button>
-    </md-list-item>
-    <md-list-item>
-        <md-button><md-icon md-svg-src="images/avatar-1.svg" class="avatar"></md-icon>Test3</md-button>
-    </md-list-item>
-
     </md-sidenav>
+
     <md-content flex id="content" class="lightgreen">
-        <md-icon md-svg-src="images/avatar-1.svg" class="avatar"></md-icon>
-        <h2>Test</h2>
+        <md-icon md-svg-src="images/{{pc.selected.avatar}}" class="avatar"></md-icon>
+        <h2>{{pc.selected.name}}</h2>
         <p>
-            Premier test
+            {{pc.selected.content}}
         </p>
     </md-content>
 
@@ -39,8 +33,12 @@
 <script src="node_modules/angular-animate/angular-animate.js"></script>
 <script src="node_modules/angular-aria/angular-aria.js"></script>
 <script type="text/javascript" src="node_modules/angular-material/angular-material.js"></script>
-<script>
-    angular.module('starterApp',['ngMaterial']);
+<script type="text/javascript" src="scripts/page1.js"></script>
+<script type="text/javascript" src="scripts/page1Controller.js"></script>
+<script type="text/javascript" src="scripts/page1Service.js"></script>
+
+<script type="text/javascript">
+    angular.module('starterApp',['ngMaterial','page1']);
 </script>
 </body>
 </html>
